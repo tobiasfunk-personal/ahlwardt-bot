@@ -63,7 +63,14 @@ class Panels(commands.Cog):
         now = datetime.now(tz)
         present, debug_log = check_traffic_debug(interaction.guild)
         
-        status_msg = f"**Status Report**\nTime: {now.strftime('%H:%M:%S')}\nTraffic Present: {present}\n\n**Debug Log**:\n```{debug_log}```"
+        status_msg = (
+            f"**Status Report**\n"
+            f"Time: {now.strftime('%H:%M:%S')}\n"
+            f"Traffic Present: {present}\n"
+            f"Placed Panels: {self.tracking_data['placed']}\n"
+            f"Fixed Panels (Hour): {self.tracking_data['fixed_this_hour']}\n\n"
+            f"**Debug Log**:\n```{debug_log}```"
+        )
         await interaction.response.send_message(status_msg, ephemeral=True)
 
 async def setup(bot):
